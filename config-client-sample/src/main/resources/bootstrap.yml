@@ -1,0 +1,19 @@
+
+server:
+  port: 8899
+
+spring:
+  application:
+    name: config-sample
+
+  cloud:
+    config:
+      name: ${spring.application.name}
+      profile: test
+      fail-fast: true
+      uri: http://localhost:8888
+
+management:
+  security:
+    enabled: false
+

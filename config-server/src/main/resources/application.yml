@@ -1,0 +1,22 @@
+
+server:
+  port: 8888
+
+spring:
+  profiles:
+    active: jdbc
+
+  cloud:
+    config:
+      server:
+        jdbc:
+          sql: SELECT prop_key, prop_value FROM app_props WHERE app_name=? AND app_env=? AND app_label=?
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/config_server?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
+    schema: classpath:db/init.sql
+    sql-script-encoding: utf-8

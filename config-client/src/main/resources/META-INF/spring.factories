@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.gitee.zicai.client.config.ConfigClientAutoConfiguration
