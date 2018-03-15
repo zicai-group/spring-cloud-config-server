@@ -87,5 +87,16 @@
         </plugins>
     </build>
 
-
+    <developers>
+        <developer>
+            <id>zicai1026</id>
+            <name>亻紫菜彡</name>
+            <email>zicai1026@qq.com</email>
+            <url>https://gitee.com/zicai1026/spring-cloud-config-server</url>
+            <roles>
+                <role>Project Manager</role>
+                <role>Project Developer</role>
+            </roles>
+        </developer>
+    </developers>
 </project>
