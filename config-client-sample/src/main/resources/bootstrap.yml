@@ -7,11 +7,21 @@ spring:
     name: config-sample
 
   cloud:
+    consul:
+      enabled: true
+      host: 192.168.0.34
+      port: 8500
+      discovery:
+        enabled: true
+        register: false
     config:
       name: ${spring.application.name}
       profile: test
       fail-fast: true
-      uri: http://localhost:8888
+#      uri: http://localhost:8888
+      discovery:
+        enabled: true
+        service-id: zicai-config-server
 
 management:
   security:

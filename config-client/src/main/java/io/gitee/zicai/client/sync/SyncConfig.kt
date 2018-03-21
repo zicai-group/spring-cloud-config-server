@@ -7,25 +7,28 @@ import org.springframework.web.client.RestTemplate
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-open class SyncConfig(private var rest: RestTemplate) {
+open class SyncConfig(private var balanceTemplate: RestTemplate, private var restTemplate: RestTemplate) {
 
     private val executor = Executors.newSingleThreadScheduledExecutor(CustomizableThreadFactory("sync-schedule"))
 
     private val delayTime = 3000.toLong()
 
-    private val syncUrl = "http://localhost:8888/published/last"
+//    private var syncUrl = "http://localhost:8888/published/last"
+    private var syncUrl = "http://zicai-config-server/published/last"
 
-    private @Volatile var currPublished: Published? = null
+    @Volatile
+    private var currPublished: Published? = null
 
     init {
         executor.scheduleWithFixedDelay(::getLast, delayTime, delayTime, TimeUnit.MILLISECONDS)
     }
 
-    private @Synchronized fun getLast() {
+    @Synchronized
+    private fun getLast() {
         var lastPublished: Published? = null
         try {
             System.err.println(">>> get lastPublished")
-            lastPublished = rest.getForObject(syncUrl, Published::class.java)
+            lastPublished = balanceTemplate.getForObject(syncUrl, Published::class.java)
         } catch (e: Exception) {
             System.err.println(">>> get lastPublished error -> ${e.message}")
         }
@@ -48,7 +51,7 @@ open class SyncConfig(private var rest: RestTemplate) {
     private fun refresh(): Boolean {
         var ok = false
         try {
-            val res = rest.postForEntity(refreshUrl, null, Any::class.java)
+            val res = restTemplate.postForEntity(refreshUrl, null, Any::class.java)
             System.err.println(">>> do refresh")
             ok = res.statusCode == HttpStatus.OK
         } catch (e: Exception) {

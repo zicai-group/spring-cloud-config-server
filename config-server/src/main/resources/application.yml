@@ -3,6 +3,9 @@ server:
   port: 8888
 
 spring:
+  application:
+    name: zicai-config-server
+
   profiles:
     active: jdbc
 
@@ -12,10 +15,23 @@ spring:
         jdbc:
           sql: SELECT prop_key, prop_value FROM app_props WHERE app_name=? AND app_env=? AND app_label=?
 
+    consul:
+      enabled: true
+      host: 192.168.0.34
+      port: 8500
+      discovery:
+        enabled: true
+        service-name: ${spring.application.name}
+        instanceId: ${spring.cloud.consul.discovery.service-name}:${random.int(10000,50000)}
+        health-check-interval: 5s
+        healthCheckPath: /health
+        preferIpAddress: true
+        query-passing: true
+
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/config_server?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: 123456
+    url: jdbc:mysql://192.168.0.33:3306/config_server_test?useUnicode=true&characterEncoding=UTF-8
+    username: test
+    password: test
     driver-class-name: com.mysql.jdbc.Driver
     type: com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
     schema: classpath:db/init.sql
