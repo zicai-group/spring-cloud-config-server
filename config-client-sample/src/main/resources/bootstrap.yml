@@ -8,7 +8,7 @@ spring:
 
   cloud:
     consul:
-      enabled: true
+      enabled: ${spring.cloud.config.discovery.enabled}
       host: 192.168.0.34
       port: 8500
       discovery:
@@ -20,8 +20,15 @@ spring:
       fail-fast: true
 #      uri: http://localhost:8888
       discovery:
-        enabled: true
+        enabled: ${config.sync.discovery}
         service-id: zicai-config-server
+
+config:
+  sync:
+    discovery: false
+#    syncUri: http://${spring.cloud.config.discovery.service-id}/published/last
+    syncUri: http://localhost:8888/published/last
+    refreshUri: http://localhost:${server.port}/refresh
 
 management:
   security:
