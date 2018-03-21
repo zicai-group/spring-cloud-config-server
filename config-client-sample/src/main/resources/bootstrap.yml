@@ -18,19 +18,19 @@ spring:
       name: ${spring.application.name}
       profile: test
       fail-fast: true
-#      uri: http://localhost:8888
+      uri: http://localhost:8888
       discovery:
         enabled: ${config.sync.discovery}
         service-id: zicai-config-server
-
-config:
-  sync:
-    discovery: false
-#    syncUri: http://${spring.cloud.config.discovery.service-id}/published/last
-    syncUri: http://localhost:8888/published/last
-    refreshUri: http://localhost:${server.port}/refresh
 
 management:
   security:
     enabled: false
 
+config:
+  sync:
+    serverPort: ${server.port}
+    discovery: true
+    syncUri: http://${spring.cloud.config.discovery.service-id}/published/last
+#    discovery: false
+#    syncUri: ${spring.cloud.config.uri}/published/last
