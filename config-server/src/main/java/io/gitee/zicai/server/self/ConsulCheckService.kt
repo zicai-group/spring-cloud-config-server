@@ -9,6 +9,8 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory
 import org.springframework.stereotype.Component
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import javax.annotation.PostConstruct
+import javax.annotation.PreDestroy
 
 /**
  * ConsulCheckService
@@ -26,10 +28,6 @@ open class ConsulCheckService {
 
     private val executor = Executors.newSingleThreadScheduledExecutor(CustomizableThreadFactory("consul-clear"))
 
-    init {
-        executor.scheduleWithFixedDelay({ check() }, 30000, 30000, TimeUnit.MILLISECONDS)
-    }
-
     private fun check() {
         System.err.println(">>> consul services check.")
         val res = consulClient.getHealthServices(appName, false, QueryParams.DEFAULT)
@@ -45,5 +43,15 @@ open class ConsulCheckService {
                         System.err.println(">>> Deregister $it")
                     }
         }
+    }
+
+    @PostConstruct
+    open fun before() {
+        executor.scheduleWithFixedDelay({ check() }, 30000, 30000, TimeUnit.MILLISECONDS)
+    }
+
+    @PreDestroy
+    open fun destroy() {
+        executor.shutdown()
     }
 }

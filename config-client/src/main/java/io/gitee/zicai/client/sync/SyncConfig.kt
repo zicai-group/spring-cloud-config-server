@@ -6,6 +6,8 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory
 import org.springframework.web.client.RestTemplate
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import javax.annotation.PostConstruct
+import javax.annotation.PreDestroy
 
 open class SyncConfig(
         private var balanceTemplate: RestTemplate,
@@ -16,10 +18,6 @@ open class SyncConfig(
 
     @Volatile
     private var currPublished: Published? = null
-
-    init {
-        executor.scheduleWithFixedDelay(::getLast, syncConfigProperties.delayTime, syncConfigProperties.delayTime, TimeUnit.MILLISECONDS)
-    }
 
     @Synchronized
     private fun getLast() {
@@ -55,5 +53,15 @@ open class SyncConfig(
             System.err.println(">>> refresh error -> ${e.message}")
         }
         return ok
+    }
+
+    @PostConstruct
+    open fun before() {
+        executor.scheduleWithFixedDelay(::getLast, syncConfigProperties.delayTime, syncConfigProperties.delayTime, TimeUnit.MILLISECONDS)
+    }
+
+    @PreDestroy
+    open fun destroy() {
+        executor.shutdown()
     }
 }
