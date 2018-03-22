@@ -14,10 +14,7 @@ open class SyncConfigProperties {
 
     var syncUri: String = "http://localhost:8888"
 
-    var serverPort: String = "8080"
-
-    var refreshUri: String = "http://localhost:$serverPort/refresh"
-        get() = "http://localhost:$serverPort/refresh"
+    var refreshUri: String = "http://localhost:8080/refresh"
 
     var delayTime: Long = 3000
 }
