@@ -8,8 +8,12 @@ import org.springframework.cloud.config.server.EnableConfigServer
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigServer
-open class App
+open class App {
 
-fun main(args: Array<String>) {
-    SpringApplication.run(App::class.java, *args)
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            SpringApplication.run(App::class.java, *args)
+        }
+    }
 }

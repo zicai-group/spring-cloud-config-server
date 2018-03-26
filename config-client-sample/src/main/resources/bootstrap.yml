@@ -7,13 +7,6 @@ spring:
     name: config-sample
 
   cloud:
-    consul:
-      enabled: ${spring.cloud.config.discovery.enabled}
-      host: 192.168.0.34
-      port: 8500
-      discovery:
-        enabled: true
-        register: false
     config:
       name: ${spring.application.name}
       profile: test
@@ -22,6 +15,14 @@ spring:
       discovery:
         enabled: ${config.sync.discovery}
         service-id: zicai-config-server
+
+eureka:
+  client:
+    enabled: ${spring.cloud.config.discovery.enabled}
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 management:
   security:
