@@ -1,0 +1,15 @@
+
+server:
+  port: 8761
+
+spring:
+  application:
+    name: zicai-eureka-server
+
+eureka:
+  server:
+    renewal-threshold-update-interval-ms: 5000
+    eviction-interval-timer-in-ms: 5000
+  client:
+    fetch-registry: false
+    register-with-eureka: false

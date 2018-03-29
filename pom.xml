@@ -28,6 +28,8 @@
         <module>config-client</module>
         <module>config-client-sample</module>
         <module>config-core</module>
+        <module>eureka-server</module>
+        <module>test-sample</module>
     </modules>
 
     <properties>

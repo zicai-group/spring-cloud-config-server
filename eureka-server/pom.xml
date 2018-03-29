@@ -9,14 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>config-client-sample</artifactId>
+    <artifactId>eureka-server</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>io.gitee.zicai</groupId>
-            <artifactId>config-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -24,6 +20,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <version>${spring-cloud-netflix.version}</version>
         </dependency>
     </dependencies>
 
@@ -33,7 +34,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>io.gitee.zicai.sample.App</mainClass>
+                    <mainClass>io.gitee.zicai.eureka.server.App</mainClass>
                 </configuration>
             </plugin>
             <plugin>

@@ -1,0 +1,18 @@
+
+server:
+  port: 8899
+
+spring:
+  application:
+    name: zicai-test-sample
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    appname: ${spring.application.name}
+    instance-id: ${spring.application.name}:${random.int(10000,50000)}
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10

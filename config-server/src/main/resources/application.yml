@@ -11,22 +11,12 @@ spring:
 
   cloud:
     config:
+      discovery:
+        enabled: true
+        service-id: ${spring.application.name}
       server:
         jdbc:
           sql: SELECT prop_key, prop_value FROM app_props WHERE app_name=? AND app_env=? AND app_label=?
-
-    consul:
-      enabled: true
-      host: 192.168.0.34
-      port: 8500
-      discovery:
-        enabled: true
-        service-name: ${spring.application.name}
-        instanceId: ${spring.cloud.consul.discovery.service-name}:${random.int(10000,50000)}
-        health-check-interval: 5s
-        healthCheckPath: /health
-        preferIpAddress: true
-        query-passing: true
 
   datasource:
     url: jdbc:mysql://192.168.0.33:3306/config_server_test?useUnicode=true&characterEncoding=UTF-8
@@ -36,3 +26,14 @@ spring:
     type: com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
     schema: classpath:db/init.sql
     sql-script-encoding: utf-8
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    appname: ${spring.application.name}
+    instance-id: ${spring.application.name}:${random.int(10000,50000)}
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
