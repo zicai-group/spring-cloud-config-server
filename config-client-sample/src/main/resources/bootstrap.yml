@@ -25,8 +25,8 @@ eureka:
     prefer-ip-address: true
     appname: ${spring.application.name}
     instance-id: ${spring.application.name}-${random.int}
-    lease-expiration-duration-in-seconds: 30
-    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 6
+    lease-renewal-interval-in-seconds: 3
 
 management:
   security:
