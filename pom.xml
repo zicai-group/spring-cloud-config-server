@@ -38,8 +38,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <spring-boot.version>1.5.10.RELEASE</spring-boot.version>
         <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
-        <spring-cloud-config.version>1.4.2.RELEASE</spring-cloud-config.version>
-        <spring-cloud-netflix.version>1.4.3.RELEASE</spring-cloud-netflix.version>
         <kotlin.version>1.2.30</kotlin.version>
     </properties>
 
