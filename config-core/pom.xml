@@ -20,6 +20,11 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>
