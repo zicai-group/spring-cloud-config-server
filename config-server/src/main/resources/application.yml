@@ -6,26 +6,35 @@ spring:
   application:
     name: zicai-config-server
 
-  profiles:
-    active: jdbc
-
   cloud:
     config:
       discovery:
         enabled: true
         service-id: ${spring.application.name}
-      server:
-        jdbc:
-          sql: SELECT prop_key, prop_value FROM app_props WHERE app_name=? AND app_env=? AND app_label=?
 
   datasource:
-    url: jdbc:mysql://192.168.0.33:3306/config_server_test?useUnicode=true&characterEncoding=UTF-8
+    type: com.zaxxer.hikari.HikariDataSource
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+    sql-script-encoding: utf-8
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:config_server_test
     username: test
     password: test
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
-    schema: classpath:db/init.sql
-    sql-script-encoding: utf-8
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: io.gitee.zicai.core.entity
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  not-empty: false
+#pagehelper:
+#  helper-dialect: MYSQL
 
 eureka:
   client:

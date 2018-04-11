@@ -1,6 +1,6 @@
 package io.gitee.zicai.sample.controller
 
-import io.gite.zicai.domain.Published
+import io.gitee.zicai.core.entity.Published
 import io.gitee.zicai.client.sync.SyncConfigProperties
 import io.gitee.zicai.sample.service.PropService
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +24,6 @@ open class PropsController {
     open fun getProps() = propService.getProps()
 
     @GetMapping("/last")
-    open fun getLast() = balanceTemplate?.getForObject(syncConfigProperties.syncUri, Published::class.java) ?: Published(appName = "nonBalance")
+    open fun getLast() = balanceTemplate?.getForObject(syncConfigProperties.syncUri, Published::class.java) ?: Published()
 
 }

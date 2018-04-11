@@ -35,11 +35,11 @@ management:
 config:
   sync:
     discovery: true
-    syncUri: http://${spring.cloud.config.discovery.service-id}/published/last
+    sync-uri: http://${spring.cloud.config.discovery.service-id}/published/last/${spring.cloud.config.name}/${spring.cloud.config.profile}
 #    discovery: false
-#    syncUri: ${spring.cloud.config.uri}/published/last
-#   refreshUri为固定值
-    refreshUri: http://localhost:${server.port}/refresh
+#    sync-uri: ${spring.cloud.config.uri}/published/last/${spring.cloud.config.name}/${spring.cloud.config.profile}
+#   refresh-uri为固定值
+    refresh-uri: http://localhost:${server.port}/refresh
 
 logging:
   level:

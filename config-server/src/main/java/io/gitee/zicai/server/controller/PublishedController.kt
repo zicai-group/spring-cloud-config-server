@@ -1,7 +1,6 @@
 package io.gitee.zicai.server.controller
 
-import io.gite.zicai.domain.Published
-import io.gitee.zicai.server.dao.PublishedDao
+import io.gitee.zicai.biz.service.PublishedService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController
 open class PublishedController {
 
     @Autowired
-    private lateinit var publishDao: PublishedDao
+    private lateinit var publishedService: PublishedService
 
-    @GetMapping("/save/{appName}")
-    open fun save(@PathVariable appName: String) {
-        appName.let { Published(appName = it) }.let(publishDao::insert)
+    @GetMapping("/save/{appName}/{profile}")
+    open fun save(@PathVariable appName: String, @PathVariable profile: String) {
+        publishedService.insert(appName, profile)
     }
 
-    @GetMapping("/last")
-    open fun last(): Published? = publishDao.getLast()
+    @GetMapping("/last/{appName}/{profile}")
+    open fun last(@PathVariable appName: String, @PathVariable profile: String) = publishedService.getLast(appName, profile)
 }

@@ -1,6 +1,7 @@
 package io.gitee.zicai.client.sync
 
-import io.gite.zicai.domain.Published
+import io.gitee.zicai.core.entity.Published
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory
 import org.springframework.web.client.RestTemplate
@@ -14,7 +15,9 @@ open class SyncConfig(
         private var restTemplate: RestTemplate,
         private var syncConfigProperties: SyncConfigProperties) {
 
-    private val executor = Executors.newSingleThreadScheduledExecutor(CustomizableThreadFactory("sync-schedule"))
+    private val log = LoggerFactory.getLogger(SyncConfig::class.java)
+
+    private val executor = Executors.newSingleThreadScheduledExecutor(CustomizableThreadFactory("config-sync-pool-"))
 
     @Volatile
     private var currPublished: Published? = null
@@ -23,23 +26,21 @@ open class SyncConfig(
     private fun getLast() {
         var lastPublished: Published? = null
         try {
-            System.err.println(">>> get lastPublished")
+            log.debug(">>> get lastPublished")
             val rest = if (syncConfigProperties.discovery) balanceTemplate else restTemplate
             lastPublished = rest.getForObject(syncConfigProperties.syncUri, Published::class.java)
         } catch (e: Exception) {
-            System.err.println(">>> get lastPublished error -> ${e.message}")
+            log.warn(">>> get lastPublished error -> ${e.message}")
         }
-        if (lastPublished == null) {
-            return
-        }
-        if (currPublished != null && currPublished!!.id >= lastPublished.id) {
+        lastPublished ?: return
+        if (currPublished != null && !currPublished!!.publishTime.before(lastPublished.publishTime)) {
             return
         }
         if (refresh()) {
             currPublished = lastPublished
-            System.err.println(">>> refresh ok")
+            log.debug(">>> refresh ok")
         } else {
-            System.err.println(">>> refresh fail")
+            log.debug(">>> refresh fail")
         }
     }
 
@@ -47,10 +48,11 @@ open class SyncConfig(
         var ok = false
         try {
             val res = restTemplate.postForEntity(syncConfigProperties.refreshUri, null, Any::class.java)
-            System.err.println(">>> do refresh")
+            log.debug(">>> do refresh")
             ok = res.statusCode == HttpStatus.OK
+            log.debug(">>> changed -> ${res.body}")
         } catch (e: Exception) {
-            System.err.println(">>> refresh error -> ${e.message}")
+            log.warn(">>> refresh error -> ${e.message}")
         }
         return ok
     }
@@ -62,6 +64,6 @@ open class SyncConfig(
 
     @PreDestroy
     open fun destroy() {
-        executor.shutdown()
+        executor?.shutdown()
     }
 }
