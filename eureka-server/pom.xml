@@ -33,7 +33,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>io.gitee.zicai.eureka.server.App</mainClass>
+                    <mainClass>io.gitee.zicai.eureka.server.EurekaServerApp</mainClass>
                 </configuration>
             </plugin>
             <plugin>

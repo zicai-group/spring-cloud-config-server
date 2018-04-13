@@ -33,7 +33,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>io.gitee.zicai.sample.App</mainClass>
+                    <mainClass>io.gitee.zicai.sample.ClientSampleApp</mainClass>
                 </configuration>
             </plugin>
             <plugin>

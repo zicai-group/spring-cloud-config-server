@@ -14,8 +14,8 @@ import tk.mybatis.spring.annotation.MapperScan
 @EnableDiscoveryClient
 @EnableConfigServer
 @EnableTransactionManagement
-@MapperScan("io.gitee.zicai.core.mapper")
-open class App {
+@MapperScan("io.gitee.zicai.biz.mapper")
+open class ConfigServerApp {
 
     @Bean
     open fun jdbcEnvironmentRepository(appPropsService: AppPropsService) = JdbcEnvironmentRepository(appPropsService)
@@ -23,7 +23,7 @@ open class App {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            SpringApplication.run(App::class.java, *args)
+            SpringApplication.run(ConfigServerApp::class.java, *args)
         }
     }
 }

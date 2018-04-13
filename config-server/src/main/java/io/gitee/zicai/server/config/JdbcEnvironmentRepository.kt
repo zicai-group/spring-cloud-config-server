@@ -23,14 +23,15 @@ open class JdbcEnvironmentRepository(private val appPropsService: AppPropsServic
         if (!profile.startsWith("default")) {
             profile = "default,$profile"
         }
-        val profiles = StringUtils.commaDelimitedListToStringArray(profile)
-        val environment = Environment(application, profiles, label, null, null)
         if (!config.startsWith("application")) {
             config = "application,$config"
         }
+
         val applications = StringUtils.commaDelimitedListToStringArray(config).distinct().toList().asReversed()
+        val profiles = StringUtils.commaDelimitedListToStringArray(profile)
         val envs = profiles.distinct().toList().asReversed()
 
+        val environment = Environment(application, profiles, label, null, null)
         applications.forEach { app ->
             envs.forEach { env ->
                 env.let { appPropsService.findProps(app, it) }

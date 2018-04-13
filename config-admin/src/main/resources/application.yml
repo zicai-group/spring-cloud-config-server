@@ -1,0 +1,26 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: zicai-config-admin
+
+eureka:
+  client:
+    enabled: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    appname: ${spring.application.name}
+    instance-id: ${spring.application.name}:${random.int(10000,50000)}
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
+
+ribbon:
+  eureka:
+    enabled: ${eureka.client.enabled}
+zicai-config-server:
+  ribbon:
+    listOfServers: localhost:8888

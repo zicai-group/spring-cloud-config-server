@@ -6,12 +6,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 
 @SpringBootApplication
 @EnableDiscoveryClient
-open class App {
+open class ClientSampleApp {
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            SpringApplication.run(App::class.java, *args)
+            SpringApplication.run(ClientSampleApp::class.java, *args)
         }
     }
 }
