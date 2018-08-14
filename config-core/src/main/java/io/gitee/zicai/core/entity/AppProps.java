@@ -1,8 +1,10 @@
 package io.gitee.zicai.core.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Entity
 @Table(name = "app_props")
 public class AppProps extends BaseEntity {
 

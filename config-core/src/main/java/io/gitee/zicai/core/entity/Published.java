@@ -1,9 +1,11 @@
 package io.gitee.zicai.core.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
 @Table(name = "published")
 public class Published extends BaseEntity {
 

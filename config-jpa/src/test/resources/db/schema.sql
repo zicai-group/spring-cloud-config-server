@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS app;
+
+CREATE TABLE app(
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
+  app_name VARCHAR(255) NOT NULL COMMENT '应用名',
+  app_env VARCHAR(255) NOT NULL COMMENT '配置环境',
+  create_time DATETIME NOT NULL COMMENT '添加时间',
+  PRIMARY KEY (id)
+);
+
+
+
+DROP TABLE IF EXISTS app_props;
+
+CREATE TABLE app_props(
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
+  app_id BIGINT NOT NULL COMMENT '应用id',
+  prop_key VARCHAR(255) NOT NULL COMMENT '参数名',
+  prop_value VARCHAR(255) COMMENT '参数值',
+  create_time DATETIME NOT NULL COMMENT '添加时间',
+  PRIMARY KEY (id)
+);
+
+
+
+DROP TABLE IF EXISTS published;
+
+CREATE TABLE published(
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
+  app_id BIGINT NOT NULL COMMENT '应用id',
+  props_data VARCHAR(512) NOT NULL COMMENT '发布内容',
+  publish_time DATETIME NOT NULL COMMENT '发布时间',
+  create_time DATETIME NOT NULL COMMENT '添加时间',
+  PRIMARY KEY (id)
+);

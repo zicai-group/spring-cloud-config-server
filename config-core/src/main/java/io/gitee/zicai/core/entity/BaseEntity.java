@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Date;
 
+@MappedSuperclass
 public class BaseEntity implements Serializable {
 
     /**
@@ -15,6 +18,7 @@ public class BaseEntity implements Serializable {
      */
     @Id
     @Column(name = "id")
+    @GeneratedValue
     protected Long id;
 
     /**
