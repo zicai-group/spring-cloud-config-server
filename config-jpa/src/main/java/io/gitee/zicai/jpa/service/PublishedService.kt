@@ -20,7 +20,7 @@ open class PublishedService : BaseService<PublishedRepo, Published>() {
     @Autowired
     private lateinit var appPropsService: AppPropsService
 
-    open fun insert(appId: Long?): Published? {
+    open fun insert(appId: Long): Published? {
         val app = appService.selectById(appId)
         return this.insert(app)
     }
@@ -56,6 +56,7 @@ open class PublishedService : BaseService<PublishedRepo, Published>() {
                 .orderBy(q.publishTime.desc())
                 .limit(1)
                 .fetchOne()
+        // leftJoin 需要 entity 中配置 @OneToOne 之类的关系，所以不用
 //        return jpaQuery.selectFrom(q)
 //                .leftJoin(qApp).on(q.appId.eq(qApp.id))
 //                .where(qApp.appName.eq(appName).and(qApp.appEnv.eq(appEnv)))
@@ -64,10 +65,10 @@ open class PublishedService : BaseService<PublishedRepo, Published>() {
 //                .fetchOne()
     }
 
-    open fun getLast(appId: Long?): Published? {
+    open fun getLast(appId: Long): Published? {
         val q = QPublished.published
         return jpaQuery.selectFrom(q)
-                .where(q.appId.eq(appId!!))
+                .where(q.appId.eq(appId))
                 .orderBy(q.publishTime.desc())
                 .limit(1)
                 .fetchOne()

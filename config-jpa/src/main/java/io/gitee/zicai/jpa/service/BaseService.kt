@@ -24,7 +24,7 @@ abstract class BaseService<R : BaseRepo<T>, T : BaseEntity> {
         this.jpaQuery = JPAQueryFactory(entityManager)
     }
 
-    open fun selectById(id: Long?): T {
+    open fun selectById(id: Long): T {
         return repo.findOne(id)
     }
 
@@ -34,7 +34,7 @@ abstract class BaseService<R : BaseRepo<T>, T : BaseEntity> {
     }
 
     @Transactional
-    open fun deleteById(id: Long?) {
+    open fun deleteById(id: Long) {
         repo.delete(id)
     }
 }
