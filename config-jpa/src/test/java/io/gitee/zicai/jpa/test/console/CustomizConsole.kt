@@ -1,4 +1,4 @@
-package io.gitee.zicai.test.console
+package io.gitee.zicai.jpa.test.console
 
 /** errs the given message to the standard output stream. */
 

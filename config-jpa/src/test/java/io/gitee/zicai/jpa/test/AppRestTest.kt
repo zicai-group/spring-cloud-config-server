@@ -1,7 +1,7 @@
 package io.gitee.zicai.jpa.test
 
 import io.gitee.zicai.jpa.service.AppService
-import io.gitee.zicai.test.console.err
+import io.gitee.zicai.jpa.test.console.err
 import org.junit.Before
 import org.junit.Test
 import org.springframework.boot.test.mock.mockito.MockBean
