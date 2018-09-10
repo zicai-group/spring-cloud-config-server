@@ -31,7 +31,7 @@
         <module>config-client-sample</module>
         <module>eureka-server</module>
         <module>config-admin</module>
-        <module>config-jpa</module>
+        <module>config-jooq</module>
     </modules>
 
     <repositories>
