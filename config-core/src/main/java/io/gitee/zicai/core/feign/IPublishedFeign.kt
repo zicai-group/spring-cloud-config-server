@@ -10,15 +10,15 @@ interface IPublishedFeign {
         const val PREFIX = "/published"
     }
 
-    @GetMapping(PREFIX + "save/{appName}/{profile}")
+    @GetMapping("$PREFIX/save/{appName}/{profile}")
     fun publishedSave(@PathVariable("appName") appName: String, @PathVariable("profile") profile: String): ResultVO
 
-    @GetMapping(PREFIX + "save/{appId}")
+    @GetMapping("$PREFIX/save/{appId}")
     fun publishedSave(@PathVariable("appId") appId: Long?): ResultVO
 
-    @GetMapping(PREFIX + "last/{appName}/{profile}")
+    @GetMapping("$PREFIX/last/{appName}/{profile}")
     fun publishedLast(@PathVariable("appName") appName: String, @PathVariable("profile") profile: String): ResultVO
 
-    @GetMapping(PREFIX + "last/{appId}")
+    @GetMapping("$PREFIX/last/{appId}")
     fun publishedLast(@PathVariable("appId") appId: Long?): ResultVO
 }

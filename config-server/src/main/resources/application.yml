@@ -5,6 +5,8 @@ server:
 spring:
   application:
     name: zicai-config-server
+  aop:
+    proxy-target-class: true
 
   cloud:
     config:
