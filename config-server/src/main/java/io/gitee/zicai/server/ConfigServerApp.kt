@@ -8,13 +8,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 import org.springframework.cloud.config.server.EnableConfigServer
 import org.springframework.context.annotation.Bean
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import tk.mybatis.spring.annotation.MapperScan
 
 @SpringBootApplication(scanBasePackages = ["io.gitee.zicai.server", "io.gitee.zicai.biz.service"])
 @EnableDiscoveryClient
 @EnableConfigServer
 @EnableTransactionManagement
-@MapperScan("io.gitee.zicai.biz.mapper")
 open class ConfigServerApp {
 
     @Bean

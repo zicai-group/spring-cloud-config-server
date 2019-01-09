@@ -14,7 +14,7 @@ open class PublishedController : BaseController(), IPublishedFeign {
     @Autowired
     private lateinit var publishedService: PublishedService
 
-    override fun publishedSave(@PathVariable("appName") appName: String?, @PathVariable("profile") profile: String?): ResultVO {
+    override fun publishedSave(@PathVariable("appName") appName: String, @PathVariable("profile") profile: String): ResultVO {
         return publishedService.insert(appName, profile).let(::result)
     }
 
@@ -22,7 +22,7 @@ open class PublishedController : BaseController(), IPublishedFeign {
         return publishedService.insert(appId).let(::result)
     }
 
-    override fun publishedLast(@PathVariable("appName") appName: String?, @PathVariable("profile") profile: String?): ResultVO {
+    override fun publishedLast(@PathVariable("appName") appName: String, @PathVariable("profile") profile: String): ResultVO {
         return onSuccess(publishedService.getLast(appName, profile))
     }
 

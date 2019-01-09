@@ -31,7 +31,7 @@ open class PublishedService : BaseService() {
     }
 
     private fun insert(app: App): Published? {
-        val props = appPropsService.findProps(app.appName, app.appEnv)
+        val props = appPropsService.findProps(app.appName!!, app.appEnv!!)
         if (CollectionUtils.isEmpty(props)) {
             return null
         }

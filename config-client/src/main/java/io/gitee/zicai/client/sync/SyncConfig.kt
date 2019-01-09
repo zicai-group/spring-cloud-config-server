@@ -33,7 +33,7 @@ open class SyncConfig(
             log.warn(">>> get lastPublished error -> ${e.message}")
         }
         lastPublished ?: return
-        if (currPublished != null && !currPublished!!.publishTime.before(lastPublished.publishTime)) {
+        if (currPublished != null && !currPublished!!.publishTime!!.before(lastPublished.publishTime)) {
             return
         }
         if (refresh()) {
