@@ -33,7 +33,6 @@ abstract class BaseService<M : BaseMapper<T>, T : BaseEntity> : ServiceImpl<M, T
         return baseMapper.update(entity, wrapper)
     }
 
-    @JvmOverloads
     fun page(index: Int, size: Int, wrapper: Wrapper<T>? = null): IPage<T> {
         val page = Page<T>(index.toLong(), size.toLong())
         page.setDesc("create_time")

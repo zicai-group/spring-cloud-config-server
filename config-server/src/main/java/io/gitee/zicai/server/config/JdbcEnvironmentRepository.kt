@@ -8,7 +8,7 @@ import org.springframework.core.Ordered
 import org.springframework.util.StringUtils
 
 /**
- * JdbcEnvieramentRep
+ * JdbcEnvironmentRepository
  * @author zicai
  * @since 2018-03-21
  */

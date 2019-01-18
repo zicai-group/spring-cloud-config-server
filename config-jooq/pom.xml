@@ -99,7 +99,7 @@
                     <!-- JDBC connection parameters -->
                     <jdbc>
                         <driver>org.h2.Driver</driver>
-                        <url>jdbc:h2:D:\work\workspace\IdeaProjects\GitOSC\spring-cloud-config-server\config-jpa\src\test\resources\db\config_jpa_test</url>
+                        <url>jdbc:h2:D:/h2/config_server_test;MODE=MYSQL</url>
                         <user>test</user>
                         <password>test</password>
                     </jdbc>
